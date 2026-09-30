@@ -1,8 +1,12 @@
 ---
-// A deliberately non-linear, looping path: a process is never a straight
-// line. Stations sit at points the path actually passes through.
+// A deliberately non-linear, looping ribbon: a process is never a
+// straight line. The path runs off both the top and bottom edges (its
+// true start/end are never shown), and stations sit at interior points,
+// the last one a little before the path actually ends, since the
+// journey keeps going.
 const PATH_D = `
-  M 280 20
+  M 300 -60
+  C 330 -20, 300 10, 280 20
   C 460 20, 500 140, 400 190
   C 340 225, 260 200, 260 140
   C 260 80, 340 60, 380 100
@@ -16,6 +20,7 @@ const PATH_D = `
   C 140 600, 100 660, 140 720
   C 175 775, 260 780, 320 740
   C 370 705, 420 730, 430 790
+  C 460 830, 430 900, 390 960
 `;
 
 const stations = [
@@ -24,9 +29,9 @@ const stations = [
   { label: 'Communities grow shared livelihoods', x: 320, y: 500 },
   { label: 'People and nature thrive together', x: 140, y: 720 },
   { label: 'Local ideas take root', x: 430, y: 790 },
-];
+].map((s) => ({ ...s, labelRight: s.x > 300 ? false : true }));
 
-const LABEL_W = 260;
+const LABEL_W = 250;
 const LABEL_H = 110;
 ---
 
@@ -42,33 +47,30 @@ const LABEL_H = 110;
           d={PATH_D}
           fill="none"
           stroke="#fffeb8"
-          stroke-width="14"
+          stroke-width="22"
           stroke-linecap="round"
           stroke-linejoin="round"
         ></path>
 
-        {stations.map((s, i) => {
-          const onRight = s.x > 300;
-          return (
-            <g class="journey-marker" data-index={i}>
-              <path
-                class="journey-pin"
-                d="M0 -26 C 12 -26, 20 -17, 20 -6 C 20 8, 0 26, 0 26 C 0 26, -20 8, -20 -6 C -20 -17, -12 -26, 0 -26 Z"
-                transform={`translate(${s.x}, ${s.y - 14})`}
-              />
-              <foreignObject
-                x={onRight ? s.x + 26 : s.x - 26 - LABEL_W}
-                y={s.y - LABEL_H / 2}
-                width={LABEL_W}
-                height={LABEL_H}
-              >
-                <div class={`journey-label side-${onRight ? 'right' : 'left'}`} xmlns="http://www.w3.org/1999/xhtml">
-                  {s.label}
-                </div>
-              </foreignObject>
-            </g>
-          );
-        })}
+        {stations.map((s, i) => (
+          <g class="journey-marker" data-index={i}>
+            <path
+              class="journey-pin"
+              d="M0 -26 C 12 -26, 20 -17, 20 -6 C 20 8, 0 26, 0 26 C 0 26, -20 8, -20 -6 C -20 -17, -12 -26, 0 -26 Z"
+              transform={`translate(${s.x}, ${s.y - 14})`}
+            />
+            <foreignObject
+              x={s.labelRight ? s.x + 26 : s.x - 26 - LABEL_W}
+              y={s.y - LABEL_H / 2}
+              width={LABEL_W}
+              height={LABEL_H}
+            >
+              <div class={`journey-label side-${s.labelRight ? 'right' : 'left'}`} xmlns="http://www.w3.org/1999/xhtml">
+                {s.label}
+              </div>
+            </foreignObject>
+          </g>
+        ))}
       </svg>
     </div>
   </div>
@@ -110,7 +112,6 @@ const LABEL_H = 110;
     width: 100%;
     height: 100%;
     z-index: 0;
-    overflow: visible;
   }
 
   .journey-marker {
