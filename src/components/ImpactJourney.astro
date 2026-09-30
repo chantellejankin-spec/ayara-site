@@ -1,19 +1,14 @@
 ---
 const stations = [
-  { label: 'Skills turn into confidence', progress: 0.12 },
-  { label: 'Tools open new pathways', progress: 0.32 },
-  { label: 'Communities grow shared livelihoods', progress: 0.52 },
-  { label: 'People and nature thrive together', progress: 0.72 },
-  { label: 'Local ideas take root', progress: 0.92 },
+  { label: 'Skills turn into confidence', x: 600, y: 160, side: 'right', progress: 0.12 },
+  { label: 'Tools open new pathways', x: 300, y: 340, side: 'left', progress: 0.32 },
+  { label: 'Communities grow shared livelihoods', x: 600, y: 520, side: 'right', progress: 0.52 },
+  { label: 'People and nature thrive together', x: 300, y: 700, side: 'left', progress: 0.72 },
+  { label: 'Local ideas take root', x: 600, y: 880, side: 'right', progress: 0.92 },
 ];
 
-const points = [
-  { x: 340, y: 220 },
-  { x: 60, y: 380 },
-  { x: 340, y: 540 },
-  { x: 60, y: 700 },
-  { x: 340, y: 860 },
-];
+const LABEL_W = 260;
+const LABEL_H = 120;
 ---
 
 <section class="journey-section" id="journey">
@@ -22,34 +17,45 @@ const points = [
       <p class="eyebrow reveal">Impact Journey</p>
       <svg
         class="journey-svg"
-        viewBox="0 0 400 900"
+        viewBox="0 0 900 1000"
         preserveAspectRatio="xMidYMid meet"
-        aria-hidden="true"
       >
         <path
           id="journey-path"
-          d="M 60 40
-             C 200 40, 340 140, 340 220
-             C 340 300, 60 300, 60 380
-             C 60 460, 340 460, 340 540
-             C 340 620, 60 620, 60 700
-             C 60 780, 200 780, 340 860"
+          d="M 300 40
+             C 480 40, 600 100, 600 160
+             C 600 220, 300 260, 300 340
+             C 300 420, 600 460, 600 520
+             C 600 580, 300 620, 300 700
+             C 300 780, 480 820, 600 880"
           fill="none"
           stroke="#fffeb8"
           stroke-width="10"
           stroke-linecap="round"
         ></path>
-        {points.map((p) => (
-          <circle class="journey-dot" cx={p.x} cy={p.y} r="14" />
+
+        {stations.map((s) => (
+          <circle class="journey-dot" cx={s.x} cy={s.y} r="14" />
+        ))}
+
+        {stations.map((s, i) => (
+          <foreignObject
+            x={s.side === 'right' ? s.x + 30 : s.x - 30 - LABEL_W}
+            y={s.y - LABEL_H / 2}
+            width={LABEL_W}
+            height={LABEL_H}
+          >
+            <div
+              class={`journey-label side-${s.side}`}
+              data-progress={s.progress}
+              data-index={i}
+              xmlns="http://www.w3.org/1999/xhtml"
+            >
+              {s.label}
+            </div>
+          </foreignObject>
         ))}
       </svg>
-      <div class="journey-labels">
-        {stations.map((s, i) => (
-          <p class="journey-label" data-progress={s.progress} data-index={i}>
-            {s.label}
-          </p>
-        ))}
-      </div>
     </div>
   </div>
 </section>
@@ -80,12 +86,15 @@ const points = [
   }
 
   .eyebrow {
+    position: absolute;
+    top: clamp(1.5rem, 4vh, 2.5rem);
+    left: clamp(1.25rem, 4vw, 2.5rem);
     font-size: 0.85rem;
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--forest-dark);
-    margin-bottom: 0.5rem;
+    z-index: 2;
   }
 
   .journey-svg {
@@ -94,6 +103,7 @@ const points = [
     width: 100%;
     height: 100%;
     z-index: 0;
+    overflow: visible;
   }
 
   .journey-dot {
@@ -110,22 +120,28 @@ const points = [
     transform: scale(1.3);
   }
 
-  .journey-labels {
-    position: relative;
-    z-index: 1;
+  .journey-label {
+    font-family: "Almarai", Arial, Helvetica, sans-serif;
+    font-weight: 800;
+    font-size: 1.15rem;
+    line-height: 1.25;
+    color: var(--forest-dark);
+    opacity: 0.3;
+    transform: translateY(8px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    display: flex;
+    align-items: center;
     height: 100%;
   }
 
-  .journey-label {
-    position: absolute;
-    max-width: 220px;
-    font-weight: 800;
-    font-size: clamp(1rem, 1.8vw, 1.3rem);
-    color: var(--forest-dark);
-    opacity: 0.25;
-    transform: translateY(10px);
-    transition: opacity 0.4s ease, transform 0.4s ease;
-    margin: 0;
+  .journey-label.side-left {
+    justify-content: flex-end;
+    text-align: right;
+  }
+
+  .journey-label.side-right {
+    justify-content: flex-start;
+    text-align: left;
   }
 
   .journey-label.active {
@@ -133,31 +149,14 @@ const points = [
     transform: translateY(0);
   }
 
-  .journey-label[data-index="0"] { top: 16%; left: 62%; text-align: left; }
-  .journey-label[data-index="1"] { top: 38%; left: 4%; text-align: left; }
-  .journey-label[data-index="2"] { top: 56%; left: 62%; text-align: left; }
-  .journey-label[data-index="3"] { top: 74%; left: 4%; text-align: left; }
-  .journey-label[data-index="4"] { top: 92%; left: 62%; text-align: left; }
-
   @media (max-width: 640px) {
     .journey-section {
       height: 340vh;
     }
 
-    .journey-svg {
-      opacity: 0.55;
-    }
-
     .journey-label {
-      max-width: 62%;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
     }
-
-    .journey-label[data-index="0"] { left: 34%; }
-    .journey-label[data-index="1"] { left: 4%; }
-    .journey-label[data-index="2"] { left: 34%; }
-    .journey-label[data-index="3"] { left: 4%; }
-    .journey-label[data-index="4"] { left: 34%; }
   }
 
   @media (prefers-reduced-motion: reduce) {

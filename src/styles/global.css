@@ -64,31 +64,43 @@ a {
 
 .pill-btn {
   display: inline-block;
-  border: 2px solid var(--ink);
+  border: 2px solid var(--forest);
   border-radius: 999px;
   padding: 0.65em 1.7em;
   font-size: 0.85rem;
   font-weight: 700;
   letter-spacing: 0.02em;
-  background: var(--sun);
-  color: var(--ink);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: var(--forest);
+  color: var(--paper);
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
 }
 
 .pill-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 3px 4px 0 var(--ink);
+  background: var(--forest-dark);
+  border-color: var(--forest-dark);
 }
 
 .pill-btn.on-dark {
+  background: var(--paper);
+  border-color: var(--paper);
+  color: var(--forest-dark);
+}
+
+.pill-btn.on-dark:hover {
   background: var(--sun);
   border-color: var(--sun);
-  color: var(--forest-dark);
 }
 
 .pill-btn.outline {
   background: transparent;
   border-color: currentColor;
+  color: var(--forest);
+}
+
+.pill-btn.outline:hover {
+  background: var(--forest);
+  color: var(--paper);
 }
 
 .visually-hidden {
@@ -159,10 +171,10 @@ a {
   width: 100%;
   max-width: 380px;
   aspect-ratio: 4 / 3;
-  border-radius: 14px;
+  border-radius: 12px;
   overflow: hidden;
   margin-bottom: 1.5rem;
-  border: 3px solid var(--forest-dark);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
 }
 
 .framed-photo img {
@@ -190,8 +202,8 @@ a {
   height: 100%;
   max-height: 440px;
   object-fit: cover;
-  border-radius: 14px;
-  border: 3px solid var(--forest-dark);
+  border-radius: 12px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.14);
   display: block;
 }
 
@@ -222,16 +234,17 @@ a {
 }
 
 .card {
-  border: 2px solid var(--ink);
+  border: 1px solid var(--line);
   border-radius: 14px;
   padding: 1.75rem;
   background: var(--paper);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: 4px 5px 0 var(--forest);
+  border-color: var(--forest);
+  box-shadow: 0 10px 24px rgba(35, 79, 51, 0.16);
 }
 
 @media (max-width: 900px) {
