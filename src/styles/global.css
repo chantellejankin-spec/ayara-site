@@ -120,53 +120,98 @@ a {
   }
 }
 
-/* Full-bleed parallax image panel */
-.panel {
-  position: relative;
-  height: 78vh;
-  min-height: 400px;
-  overflow: hidden;
+/* Split, flat-colour sections (Ayara's own idiom: solid colour blocks
+   and framed photos, not full-bleed photo-with-scrim) */
+.split-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 80vh;
+}
+
+.split-panel {
+  padding: clamp(2rem, 6vw, 4rem);
   display: flex;
-  align-items: flex-end;
-  border-radius: 14px;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.panel-media {
-  position: absolute;
-  inset: -18% -8%;
-  z-index: 0;
+.split-panel.forest {
+  background: var(--forest);
 }
 
-.panel-media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  will-change: transform;
-}
-
-.panel-scrim {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: linear-gradient(to top, rgba(35, 79, 51, 0.78) 0%, rgba(35, 79, 51, 0.2) 55%, transparent 100%);
-}
-
-.panel-content {
-  position: relative;
-  z-index: 2;
-  color: var(--paper);
-  padding: clamp(2rem, 6vw, 3.5rem);
-  width: 100%;
-}
-
-.panel-content h1,
-.panel-content h2,
-.panel-content h3 {
+.split-panel.forest h1,
+.split-panel.forest h2,
+.split-panel.forest h3 {
   color: var(--sun);
 }
 
-.panel-content p {
-  color: rgba(253, 253, 246, 0.9);
+.split-panel.forest p {
+  color: rgba(253, 253, 246, 0.92);
+}
+
+.split-panel.sky {
+  background: var(--sky);
+  position: relative;
+  overflow: hidden;
+}
+
+.framed-photo {
+  width: 100%;
+  max-width: 380px;
+  aspect-ratio: 4 / 3;
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  border: 3px solid var(--forest-dark);
+}
+
+.framed-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Content sections: framed photo beside a solid-colour text panel */
+.content-split {
+  min-height: auto;
+}
+
+.content-split .photo-box {
+  padding: clamp(1.5rem, 4vw, 3rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--sky-soft);
+}
+
+.content-split .photo-box img {
+  width: 100%;
+  height: 100%;
+  max-height: 440px;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 3px solid var(--forest-dark);
+  display: block;
+}
+
+.content-split.reverse {
+  direction: rtl;
+}
+
+.content-split.reverse > * {
+  direction: ltr;
+}
+
+@media (max-width: 900px) {
+  .split-section,
+  .content-split {
+    grid-template-columns: 1fr;
+  }
+
+  .content-split .photo-box img {
+    max-height: 320px;
+  }
 }
 
 /* Card grid */

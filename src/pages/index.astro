@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import ImagePanel from '../components/ImagePanel.astro';
+import PhotoBlock from '../components/PhotoBlock.astro';
 import ImpactJourney from '../components/ImpactJourney.astro';
 
 const focusAreas = [
@@ -38,25 +38,38 @@ const focusAreas = [
 ---
 
 <Layout title="For Thriving Communities and Living Nature">
-  <section class="hero panel">
-    <div class="panel-media">
-      <img
-        src="/images/hero-garden.jpg"
-        alt="Community garden activity in Sierra Leone"
-        loading="eager"
-      />
-    </div>
-    <div class="panel-scrim"></div>
-    <div class="panel-content">
-      <div class="wrap">
-        <h1 class="reveal">For Thriving Communities and Living Nature</h1>
-        <p class="lede reveal">
-          Ayara supports practical skills, self-reliance and community-led
-          action for people, livelihoods and nature, working with local
-          partners across Sierra Leone, Zimbabwe and The Gambia.
-        </p>
-        <a class="pill-btn reveal" href="#journey">See the Impact Journey</a>
+  <section class="split-section hero-split">
+    <div class="split-panel forest">
+      <div class="framed-photo reveal">
+        <img
+          src="/images/hero-garden.jpg"
+          alt="Community garden activity in Sierra Leone"
+          loading="eager"
+        />
       </div>
+      <h1 class="reveal">For Thriving Communities and Living Nature</h1>
+      <p class="lede reveal">
+        Ayara supports practical skills, self-reliance and community-led
+        action for people, livelihoods and nature, working with local
+        partners across Sierra Leone, Zimbabwe and The Gambia.
+      </p>
+      <a class="pill-btn reveal" href="#journey">See the Impact Journey</a>
+    </div>
+    <div class="split-panel sky hero-sky">
+      <svg class="hero-swirl" viewBox="0 0 200 200" aria-hidden="true">
+        <circle cx="70" cy="40" r="14" fill="none" stroke="#fffeb8" stroke-width="8" />
+        <path
+          d="M70 54 C70 90, 160 90, 160 130 C160 170, 40 170, 40 150"
+          fill="none"
+          stroke="#fffeb8"
+          stroke-width="8"
+          stroke-linecap="round"
+        ></path>
+      </svg>
+      <p class="hero-tagline reveal">
+        Skills turn into confidence. Tools open new pathways. Communities
+        grow shared livelihoods, and people and nature thrive together.
+      </p>
     </div>
   </section>
 
@@ -103,19 +116,16 @@ const focusAreas = [
     </div>
   </section>
 
-  <ImagePanel
-    src="/images/focus-forest.jpg"
-    alt="Forest landscape from above"
-    eyebrow="Partnerships"
-  >
+  <PhotoBlock src="/images/focus-forest.jpg" alt="Forest landscape from above" tone="forest">
+    <p class="eyebrow reveal">Partnerships</p>
     <h2 class="reveal">Built With Partners on the Ground</h2>
     <p class="reveal">
       From EquiEarth and PRIDO in Sierra Leone to research partners at
       ETH Z&uuml;rich and the University of Bath, our work happens
-      through partnership, not in isolation.
+      through partnership.
     </p>
-    <a class="pill-btn on-dark reveal" href="/partners">Meet Our Partners</a>
-  </ImagePanel>
+    <a class="pill-btn reveal" href="/partners">Meet Our Partners</a>
+  </PhotoBlock>
 
   <section class="section cta">
     <div class="wrap cta-inner reveal">
@@ -130,14 +140,44 @@ const focusAreas = [
 </Layout>
 
 <style>
-  .hero {
-    height: 88vh;
+  .hero-split {
+    min-height: 88vh;
   }
 
   .lede {
     font-size: 1.1rem;
-    max-width: 52ch;
+    max-width: 44ch;
     margin-bottom: 1.5rem;
+  }
+
+  .hero-sky {
+    align-items: center;
+    text-align: center;
+    position: relative;
+  }
+
+  .hero-swirl {
+    width: 60%;
+    max-width: 220px;
+    margin: 0 auto 1.5rem;
+  }
+
+  .hero-tagline {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--forest-dark);
+    max-width: 34ch;
+    margin: 0 auto;
+  }
+
+  .split-panel.forest .eyebrow {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--sun);
+    opacity: 0.9;
+    margin-bottom: 0.5rem;
   }
 
   .about-grid {

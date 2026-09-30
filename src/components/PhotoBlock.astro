@@ -1,0 +1,19 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  tone?: 'forest' | 'sky';
+  reverse?: boolean;
+}
+
+const { src, alt, tone = 'forest', reverse = false } = Astro.props;
+---
+
+<section class={`split-section content-split ${reverse ? 'reverse' : ''}`}>
+  <div class="photo-box reveal">
+    <img src={src} alt={alt} loading="lazy" />
+  </div>
+  <div class={`split-panel ${tone}`}>
+    <slot />
+  </div>
+</section>

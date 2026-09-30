@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import ImagePanel from '../components/ImagePanel.astro';
+import PhotoBlock from '../components/PhotoBlock.astro';
 ---
 
 <Layout
@@ -40,7 +40,7 @@ import ImagePanel from '../components/ImagePanel.astro';
     </div>
   </section>
 
-  <ImagePanel src="/images/focus-nature.jpg" alt="Aerial view of natural landscape">
+  <PhotoBlock src="/images/focus-nature.jpg" alt="Aerial view of natural landscape" tone="forest" reverse>
     <h2 class="reveal">Ideas Into Fundable Projects</h2>
     <p class="reveal">
       Our work focuses on projects that strengthen local knowledge,
@@ -49,7 +49,7 @@ import ImagePanel from '../components/ImagePanel.astro';
       work with local partners to turn practical ideas into fundable
       projects that communities can use, own and grow.
     </p>
-  </ImagePanel>
+  </PhotoBlock>
 
   <section class="section what-section">
     <div class="wrap what-grid">
