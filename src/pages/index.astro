@@ -1,0 +1,190 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ImagePanel from '../components/ImagePanel.astro';
+import ImpactJourney from '../components/ImpactJourney.astro';
+
+const focusAreas = [
+  {
+    href: '/focus/circular-economy',
+    title: 'Circular Economy & Waste-to-Value',
+    summary: 'Plastic recycling, biogas, pottery, mycelium materials and coastal waste projects across Sierra Leone, Zimbabwe and The Gambia.',
+  },
+  {
+    href: '/focus/climate-resilient-building',
+    title: 'Climate-Resilient Building & Renewable Energy',
+    summary: 'Rammed-earth construction, skills pathways and a renewable-energy resilience valley concept.',
+  },
+  {
+    href: '/focus/textiles-skills-enterprise',
+    title: 'Textiles, Skills & Enterprise Hubs',
+    summary: 'A cotton-to-fabric value chain from pilot to industrial scale, plus carpentry, woodworking and diamond beneficiation hubs.',
+  },
+  {
+    href: '/focus/water-sanitation-health',
+    title: 'Water, Sanitation & Community Health',
+    summary: 'A commercial safe-drinking-water venture and sustainable menstrual health access, both built as social businesses.',
+  },
+  {
+    href: '/focus/blue-economy-agriculture',
+    title: 'Blue Economy, Agriculture & Livelihoods',
+    summary: 'Coastal fisher safety, mangrove restoration with beekeeping, circular agro-ecosystems and women-led food processing.',
+  },
+  {
+    href: '/focus/responsible-mining',
+    title: 'Responsible Mining & Digital Governance',
+    summary: 'MineralsReady: a digital compliance and training platform for artisanal mining and government readiness.',
+  },
+];
+---
+
+<Layout title="For Thriving Communities and Living Nature">
+  <section class="hero panel">
+    <div class="panel-media">
+      <img
+        src="/images/hero-garden.jpg"
+        alt="Community garden activity in Sierra Leone"
+        loading="eager"
+      />
+    </div>
+    <div class="panel-scrim"></div>
+    <div class="panel-content">
+      <div class="wrap">
+        <h1 class="reveal">For Thriving Communities and Living Nature</h1>
+        <p class="lede reveal">
+          Ayara supports practical skills, self-reliance and community-led
+          action for people, livelihoods and nature, working with local
+          partners across Sierra Leone, Zimbabwe and The Gambia.
+        </p>
+        <a class="pill-btn reveal" href="#journey">See the Impact Journey</a>
+      </div>
+    </div>
+  </section>
+
+  <ImpactJourney />
+
+  <section id="about" class="section about-section">
+    <div class="wrap about-grid">
+      <h2 class="reveal">About Ayara</h2>
+      <div class="reveal">
+        <p>
+          The name Ayara is inspired by Ay&eacute;, which refers to the
+          physical world, and Ara, meaning mystery or wonder, in Yoruba.
+          For us, Ayara stands for a world that is understood, cared for
+          and shaped together.
+        </p>
+        <p>
+          We work with local partners to turn practical ideas into
+          fundable projects that communities can use, own and grow:
+          vocational training, community workshops, sustainable building,
+          circular economy and women-led livelihood initiatives, rooted
+          in local needs.
+        </p>
+        <a class="pill-btn outline" href="/about">Our Full Story</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="focus" class="section focus-section">
+    <div class="wrap">
+      <h2 class="reveal">Focus</h2>
+      <p class="intro reveal">
+        Six programme areas, drawn from real projects we support with
+        partners on the ground.
+      </p>
+      <div class="card-grid">
+        {focusAreas.map((f) => (
+          <a class="card reveal" href={f.href}>
+            <h3>{f.title}</h3>
+            <p>{f.summary}</p>
+            <span class="more">Learn more &rarr;</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <ImagePanel
+    src="/images/focus-forest.jpg"
+    alt="Forest landscape from above"
+    eyebrow="Partnerships"
+  >
+    <h2 class="reveal">Built With Partners on the Ground</h2>
+    <p class="reveal">
+      From EquiEarth and PRIDO in Sierra Leone to research partners at
+      ETH Z&uuml;rich and the University of Bath, our work happens
+      through partnership, not in isolation.
+    </p>
+    <a class="pill-btn on-dark reveal" href="/partners">Meet Our Partners</a>
+  </ImagePanel>
+
+  <section class="section cta">
+    <div class="wrap cta-inner reveal">
+      <h2>Let&rsquo;s Build Something Together</h2>
+      <p>
+        Whether you are a community partner, funder or researcher, we
+        would love to hear from you.
+      </p>
+      <a class="pill-btn" href="/contact">Contact Us</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    height: 88vh;
+  }
+
+  .lede {
+    font-size: 1.1rem;
+    max-width: 52ch;
+    margin-bottom: 1.5rem;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: var(--gap);
+  }
+
+  .about-grid p {
+    font-size: 1.02rem;
+  }
+
+  .about-section {
+    background: var(--sky-soft);
+  }
+
+  .intro {
+    max-width: 640px;
+    margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  .card .more {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--forest);
+    display: inline-block;
+    margin-top: 0.5rem;
+  }
+
+  .cta {
+    background: var(--sun);
+  }
+
+  .cta-inner {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .cta-inner p {
+    margin-bottom: 1.5rem;
+    color: var(--ink-soft);
+  }
+
+  @media (max-width: 900px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

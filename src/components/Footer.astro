@@ -1,0 +1,49 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p class="brand">Ayara Foundation</p>
+    <nav>
+      <a href="/about">About</a>
+      <a href="/focus">Focus</a>
+      <a href="/partners">Partners</a>
+      <a href="/contact">Contact</a>
+    </nav>
+    <p class="copy">&copy; {year} Ayara Foundation</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 2px solid var(--ink);
+    padding: 2.5rem 0;
+    font-size: 0.85rem;
+    background: var(--sky-soft);
+  }
+
+  .footer-inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2rem;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .brand {
+    margin: 0;
+    font-weight: 800;
+    color: var(--forest);
+  }
+
+  nav {
+    display: flex;
+    gap: 1.5rem;
+    font-weight: 700;
+  }
+
+  .copy {
+    margin: 0;
+  }
+</style>

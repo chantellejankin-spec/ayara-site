@@ -1,0 +1,200 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const partners = [
+  {
+    name: 'EquiEarth Foundation',
+    initials: 'EE',
+    url: 'https://www.equiearthfoundation.org/',
+    description:
+      'Implementing partner in Sierra Leone for maker hubs, construction and bio-based material projects, including ClayWorks Pottery, MycoLoop and EarthBuild.',
+  },
+  {
+    name: 'PRIDO',
+    initials: 'PR',
+    url: 'https://www.pridosl.org/',
+    description:
+      'Implementing partner in Sierra Leone for circular agro-ecosystem, textile value-chain and women’s health projects, including the Fibre to Fabric programme.',
+  },
+  {
+    name: 'Sierra Leone Engineering Solutions (SLES CSO)',
+    initials: 'SL',
+    url: null,
+    description:
+      'Implementing partner in Sierra Leone for waste, water, fisheries and circular economy projects, including RiverSafe and the plastic recycling programme.',
+  },
+  {
+    name: 'ETH Zürich – Global Health Engineering',
+    initials: 'ETH',
+    url: 'https://ghe.ethz.ch/',
+    description:
+      'Research partner supporting health-engineering design and evaluation across Ayara’s project portfolio.',
+  },
+  {
+    name: 'University of Bath – Institute for Policy Research',
+    initials: 'UoB',
+    url: 'https://www.bath.ac.uk/research-institutes/institute-for-policy-research/',
+    description:
+      'Research partner on MineralsReady, our digital compliance and training platform for responsible artisanal-mining governance.',
+  },
+];
+---
+
+<Layout
+  title="Partners"
+  description="Ayara Foundation's implementing and research partners across Sierra Leone and internationally."
+>
+  <section class="section intro-section">
+    <div class="wrap">
+      <p class="eyebrow reveal"><a href="/">&larr; Home</a></p>
+      <h1 class="reveal">Partners</h1>
+      <p class="lede reveal">
+        Every project runs through a local or research partner. Ayara
+        does not implement alone, and this list will keep growing as
+        new partnerships form.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="partner-list">
+        {partners.map((p) => {
+          const Tag = p.url ? 'a' : 'div';
+          return (
+            <Tag
+              class="partner-card reveal"
+              {...(p.url ? { href: p.url, target: '_blank', rel: 'noopener' } : {})}
+            >
+              <span class="mark">{p.initials}</span>
+              <span class="body">
+                <span class="name">
+                  {p.name}
+                  {p.url && <span class="link-arrow">&nearr;</span>}
+                </span>
+                <span class="desc">{p.description}</span>
+              </span>
+            </Tag>
+          );
+        })}
+      </div>
+      <p class="note reveal">
+        More partners will be added here as new projects and
+        collaborations launch.
+      </p>
+    </div>
+  </section>
+
+  <section class="section cta">
+    <div class="wrap cta-inner reveal">
+      <h2>Interested in Partnering With Ayara?</h2>
+      <p>We work with implementing organisations, researchers and funders.</p>
+      <a class="pill-btn" href="/contact">Contact Us</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .eyebrow {
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+  }
+
+  .lede {
+    max-width: 640px;
+    font-size: 1.1rem;
+  }
+
+  .partner-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .partner-card {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    padding: 1.5rem;
+    background: var(--paper);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  a.partner-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 4px 5px 0 var(--forest);
+  }
+
+  .mark {
+    flex-shrink: 0;
+    width: 64px;
+    height: 64px;
+    border-radius: 12px;
+    background: var(--forest-dark);
+    color: var(--sun);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .name {
+    font-weight: 800;
+    color: var(--ink);
+    font-size: 1.05rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .link-arrow {
+    font-size: 0.9rem;
+    color: var(--forest);
+  }
+
+  .desc {
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+  }
+
+  .note {
+    font-size: 0.85rem;
+    opacity: 0.75;
+    max-width: 520px;
+  }
+
+  .cta {
+    background: var(--sun);
+  }
+
+  .cta-inner {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .cta-inner p {
+    margin-bottom: 1.5rem;
+    color: var(--ink-soft);
+  }
+
+  @media (max-width: 600px) {
+    .partner-card {
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+    }
+  }
+</style>

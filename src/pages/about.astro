@@ -1,0 +1,145 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ImagePanel from '../components/ImagePanel.astro';
+---
+
+<Layout
+  title="About"
+  description="Ayara Foundation: the story behind our name, our mission and how we work with local partners across Sierra Leone, Zimbabwe and The Gambia."
+>
+  <section class="section intro-section">
+    <div class="wrap">
+      <p class="eyebrow reveal"><a href="/">&larr; Home</a></p>
+      <h1 class="reveal">About Ayara</h1>
+      <p class="lede reveal">
+        We support practical skills, self-reliance and community-led
+        action for people, livelihoods and nature.
+      </p>
+    </div>
+  </section>
+
+  <section class="section name-section">
+    <div class="wrap name-grid">
+      <h2 class="reveal">Where the Name Comes From</h2>
+      <div class="reveal">
+        <p>
+          The name Ayara is inspired by Ay&eacute;, which refers to the
+          physical world, and Ara, meaning mystery or wonder, in Yoruba.
+          For us, Ayara stands for a world that is understood, cared for
+          and shaped together.
+        </p>
+        <p>
+          At the heart of Ayara is the relationship between people and
+          nature. Healthy livelihoods depend on land, water, soil,
+          forests, materials, skills and local ecosystems. We support
+          projects that bring these dimensions together, creating income
+          and opportunity while protecting, restoring and responsibly
+          using the natural environment.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <ImagePanel src="/images/focus-nature.jpg" alt="Aerial view of natural landscape">
+    <h2 class="reveal">Ideas Into Fundable Projects</h2>
+    <p class="reveal">
+      Our work focuses on projects that strengthen local knowledge,
+      hands-on learning, women&rsquo;s and youth opportunities, shared
+      community infrastructure and care for the natural environment. We
+      work with local partners to turn practical ideas into fundable
+      projects that communities can use, own and grow.
+    </p>
+  </ImagePanel>
+
+  <section class="section what-section">
+    <div class="wrap what-grid">
+      <h2 class="reveal">What This Looks Like in Practice</h2>
+      <div class="reveal">
+        <p>
+          Ayara&rsquo;s current portfolio spans vocational training,
+          community workshops, access to tools, sustainable building,
+          circular economy enterprises, agro-processing and women-led
+          livelihood initiatives, each one shaped by the specific local
+          needs it responds to.
+        </p>
+        <p>
+          Projects currently run in Sierra Leone, Zimbabwe, The Gambia
+          and Nigeria, each shaped with a local partner who leads
+          implementation on the ground. Ayara&rsquo;s role is to help
+          turn a workable local idea into a project that funders can
+          back and communities can sustain.
+        </p>
+        <p>
+          Every project carries a monitoring, evaluation, accountability
+          and learning (MEAL) component, so results are tracked
+          honestly and lessons feed back into how the next project is
+          designed.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section cta">
+    <div class="wrap cta-inner reveal">
+      <h2>See What We&rsquo;re Working On</h2>
+      <p>Explore our focus areas or get in touch about a partnership.</p>
+      <div class="cta-buttons">
+        <a class="pill-btn" href="/focus">Our Focus Areas</a>
+        <a class="pill-btn outline" href="/contact">Contact Us</a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .eyebrow {
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+  }
+
+  .lede {
+    max-width: 640px;
+    font-size: 1.1rem;
+  }
+
+  .name-section {
+    background: var(--sky-soft);
+  }
+
+  .name-grid,
+  .what-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: var(--gap);
+  }
+
+  .cta {
+    background: var(--sun);
+  }
+
+  .cta-inner {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .cta-inner p {
+    margin-bottom: 1.5rem;
+    color: var(--ink-soft);
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 900px) {
+    .name-grid,
+    .what-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

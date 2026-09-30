@@ -1,0 +1,110 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const focusAreas = [
+  {
+    href: '/focus/circular-economy',
+    title: 'Circular Economy & Waste-to-Value',
+    summary: 'Plastic recycling, biogas, pottery, mycelium materials and coastal waste projects across Sierra Leone, Zimbabwe and The Gambia.',
+  },
+  {
+    href: '/focus/climate-resilient-building',
+    title: 'Climate-Resilient Building & Renewable Energy',
+    summary: 'Rammed-earth construction, skills pathways and a renewable-energy resilience valley concept.',
+  },
+  {
+    href: '/focus/textiles-skills-enterprise',
+    title: 'Textiles, Skills & Enterprise Hubs',
+    summary: 'A cotton-to-fabric value chain from pilot to industrial scale, plus carpentry, woodworking and diamond beneficiation hubs.',
+  },
+  {
+    href: '/focus/water-sanitation-health',
+    title: 'Water, Sanitation & Community Health',
+    summary: 'A commercial safe-drinking-water venture and sustainable menstrual health access, both built as social businesses.',
+  },
+  {
+    href: '/focus/blue-economy-agriculture',
+    title: 'Blue Economy, Agriculture & Livelihoods',
+    summary: 'Coastal fisher safety, mangrove restoration with beekeeping, circular agro-ecosystems and women-led food processing.',
+  },
+  {
+    href: '/focus/responsible-mining',
+    title: 'Responsible Mining & Digital Governance',
+    summary: 'MineralsReady: a digital compliance and training platform for artisanal mining and government readiness.',
+  },
+];
+---
+
+<Layout
+  title="Focus"
+  description="Ayara Foundation's six programme areas: circular economy, climate-resilient building, textiles and enterprise, water and sanitation, blue economy and agriculture, and responsible mining."
+>
+  <section class="section intro-section">
+    <div class="wrap">
+      <p class="eyebrow reveal"><a href="/">&larr; Home</a></p>
+      <h1 class="reveal">Focus</h1>
+      <p class="lede reveal">
+        Six programme areas, drawn from real projects we support with
+        local partners on the ground.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="card-grid">
+        {focusAreas.map((f) => (
+          <a class="card reveal" href={f.href}>
+            <h3>{f.title}</h3>
+            <p>{f.summary}</p>
+            <span class="more">Learn more &rarr;</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section cta">
+    <div class="wrap cta-inner reveal">
+      <h2>Have a Project Idea?</h2>
+      <p>If it strengthens local skills, livelihoods or nature, we want to hear about it.</p>
+      <a class="pill-btn" href="/contact">Contact Us</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .eyebrow {
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+  }
+
+  .lede {
+    max-width: 640px;
+    font-size: 1.1rem;
+  }
+
+  .card .more {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--forest);
+    display: inline-block;
+    margin-top: 0.5rem;
+  }
+
+  .cta {
+    background: var(--sun);
+  }
+
+  .cta-inner {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .cta-inner p {
+    margin-bottom: 1.5rem;
+    color: var(--ink-soft);
+  }
+</style>
