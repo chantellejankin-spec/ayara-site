@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import PhotoBlock from '../components/PhotoBlock.astro';
 import ImpactJourney from '../components/ImpactJourney.astro';
+import MarqueeBar from '../components/MarqueeBar.astro';
 
 const focusAreas = [
   {
@@ -38,42 +39,23 @@ const focusAreas = [
 ---
 
 <Layout title="For Thriving Communities and Living Nature">
-  <section class="split-section hero-split">
-    <div class="split-panel forest">
-      <div class="framed-photo reveal">
-        <img
-          src="/images/hero-garden.jpg"
-          alt="Community garden activity in Sierra Leone"
-          loading="eager"
-        />
-      </div>
-      <h1 class="reveal">For Thriving Communities and Living Nature</h1>
+  <ImpactJourney>
+    <div class="hero-photo">
+      <img
+        src="/images/hero-garden.jpg"
+        alt="Community garden activity in Sierra Leone"
+        loading="eager"
+      />
+    </div>
+    <div class="hero-copy">
+      <h1 class="reveal">For thriving communities and living nature</h1>
       <p class="lede reveal">
-        Ayara supports practical skills, self-reliance and community-led
-        action for people, livelihoods and nature, working with local
-        partners across Sierra Leone, Zimbabwe and The Gambia.
+        Supporting practical skills, self-reliance and community-led
+        action for people, livelihoods and nature.
       </p>
-      <a class="pill-btn on-dark reveal" href="#journey">See the Impact Journey</a>
+      <a class="pill-btn on-dark reveal" href="/focus">Our Focus Areas</a>
     </div>
-    <div class="split-panel sky hero-sky">
-      <svg class="hero-swirl" viewBox="0 0 200 200" aria-hidden="true">
-        <circle cx="70" cy="40" r="14" fill="none" stroke="#fffeb8" stroke-width="8" />
-        <path
-          d="M70 54 C70 90, 160 90, 160 130 C160 170, 40 170, 40 150"
-          fill="none"
-          stroke="#fffeb8"
-          stroke-width="8"
-          stroke-linecap="round"
-        ></path>
-      </svg>
-      <p class="hero-tagline reveal">
-        Skills turn into confidence. Tools open new pathways. Communities
-        grow shared livelihoods, and people and nature thrive together.
-      </p>
-    </div>
-  </section>
-
-  <ImpactJourney />
+  </ImpactJourney>
 
   <section id="about" class="section about-section">
     <div class="wrap about-grid">
@@ -127,6 +109,8 @@ const focusAreas = [
     <a class="pill-btn on-dark reveal" href="/partners">Meet Our Partners</a>
   </PhotoBlock>
 
+  <MarqueeBar />
+
   <section class="section cta">
     <div class="wrap cta-inner reveal">
       <h2>Let&rsquo;s Build Something Together</h2>
@@ -140,34 +124,11 @@ const focusAreas = [
 </Layout>
 
 <style>
-  .hero-split {
-    min-height: 88vh;
-  }
-
   .lede {
     font-size: 1.1rem;
-    max-width: 44ch;
+    max-width: 40ch;
     margin-bottom: 1.5rem;
-  }
-
-  .hero-sky {
-    align-items: center;
-    text-align: center;
-    position: relative;
-  }
-
-  .hero-swirl {
-    width: 60%;
-    max-width: 220px;
-    margin: 0 auto 1.5rem;
-  }
-
-  .hero-tagline {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--forest-dark);
-    max-width: 34ch;
-    margin: 0 auto;
+    padding-left: 1.5rem;
   }
 
   .split-panel.forest .eyebrow {
