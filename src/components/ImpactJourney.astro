@@ -5,8 +5,8 @@
 // the last one a little before the path actually ends, since the
 // journey keeps going.
 const PATH_D = `
-  M 300 -60
-  C 330 -20, 300 10, 280 20
+  M 310 -220
+  C 300 -140, 285 -60, 280 20
   C 460 20, 500 140, 400 190
   C 340 225, 260 200, 260 140
   C 260 80, 340 60, 380 100
@@ -21,14 +21,19 @@ const PATH_D = `
   C 175 775, 260 780, 320 740
   C 370 705, 420 730, 430 790
   C 460 830, 430 900, 390 960
+  C 365 1000, 395 1060, 410 1140
 `;
 
+// Visual order along the path (top to bottom); the scroll sequence
+// starts with "Local ideas take root" per the client's direction, so
+// the labels are rotated one position while the pin positions keep
+// their natural top-to-bottom flow.
 const stations = [
-  { label: 'Skills turn into confidence', x: 400, y: 190 },
-  { label: 'Tools open new pathways', x: 100, y: 430 },
-  { label: 'Communities grow shared livelihoods', x: 320, y: 500 },
-  { label: 'People and nature thrive together', x: 140, y: 720 },
-  { label: 'Local ideas take root', x: 430, y: 790 },
+  { label: 'Local ideas take root', x: 400, y: 190 },
+  { label: 'Skills turn into confidence', x: 100, y: 430 },
+  { label: 'Tools open new pathways', x: 320, y: 500 },
+  { label: 'Communities grow shared livelihoods', x: 140, y: 720 },
+  { label: 'People and nature thrive together', x: 430, y: 790 },
 ].map((s) => ({ ...s, labelRight: s.x > 300 ? false : true }));
 
 const LABEL_W = 250;
@@ -47,7 +52,7 @@ const LABEL_H = 110;
           d={PATH_D}
           fill="none"
           stroke="#fffeb8"
-          stroke-width="22"
+          stroke-width="30"
           stroke-linecap="round"
           stroke-linejoin="round"
         ></path>
