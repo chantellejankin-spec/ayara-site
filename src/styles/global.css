@@ -104,6 +104,23 @@ a {
   color: var(--paper);
 }
 
+.text-link {
+  display: inline-block;
+  align-self: flex-start;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  color: var(--forest);
+}
+
+.text-link:hover {
+  text-decoration: underline;
+}
+
+.text-link.on-dark {
+  color: var(--sun);
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -178,7 +195,15 @@ a {
 .hero-photo {
   width: 100%;
   aspect-ratio: 16 / 9;
+  max-height: 38vh;
   overflow: hidden;
+  flex-shrink: 0;
+}
+
+@media (max-height: 700px) {
+  .hero-photo {
+    max-height: 22vh;
+  }
 }
 
 .hero-photo img {
@@ -192,9 +217,11 @@ a {
   padding-block: clamp(2rem, 6vw, 3.5rem);
   padding-inline: clamp(1.25rem, 4vw, 2.5rem);
   flex: 1;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  overflow-y: auto;
 }
 
 /* Content sections: framed photo beside a solid-colour text panel */

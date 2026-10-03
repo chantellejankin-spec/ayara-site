@@ -13,9 +13,9 @@ const PATH_D = `
   C 420 140, 380 200, 300 230
   C 180 275, 80 340, 100 430
   C 115 500, 200 520, 260 470
-  C 310 428, 280 350, 210 360
-  C 150 368, 140 430, 180 460
-  C 230 495, 300 460, 320 500
+  C 340 415, 300 295, 150 315
+  C 50 330, 30 455, 150 495
+  C 230 520, 300 470, 320 500
   C 350 560, 300 620, 220 610
   C 140 600, 100 660, 140 720
   C 175 775, 260 780, 320 740
@@ -24,14 +24,14 @@ const PATH_D = `
   C 365 1000, 395 1060, 410 1140
 `;
 
-// Visual order along the path (top to bottom); the scroll sequence
-// starts with "Local ideas take root" per the client's direction, so
-// the labels are rotated one position while the pin positions keep
-// their natural top-to-bottom flow.
+// Scroll sequence confirmed by the client: Local ideas take root,
+// Tools open new pathways, Skills turn into confidence, Communities
+// grow shared livelihoods, People and nature thrive together. Pin
+// positions keep their natural top-to-bottom flow along the path.
 const stations = [
   { label: 'Local ideas take root', x: 400, y: 190 },
-  { label: 'Skills turn into confidence', x: 100, y: 430 },
-  { label: 'Tools open new pathways', x: 320, y: 500 },
+  { label: 'Tools open new pathways', x: 100, y: 430 },
+  { label: 'Skills turn into confidence', x: 320, y: 500 },
   { label: 'Communities grow shared livelihoods', x: 140, y: 720 },
   { label: 'People and nature thrive together', x: 430, y: 790 },
 ].map((s) => ({ ...s, labelRight: s.x > 300 ? false : true }));
@@ -91,6 +91,7 @@ const LABEL_H = 110;
     position: sticky;
     top: 0;
     height: 100vh;
+    grid-template-rows: 100vh;
     overflow: hidden;
   }
 
@@ -117,6 +118,23 @@ const LABEL_H = 110;
     width: 100%;
     height: 100%;
     z-index: 0;
+    /* Fade the ribbon out near the top/bottom instead of hard-clipping
+       it at the panel edge, so it reads as continuing off-frame rather
+       than being cut off. */
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      transparent 0,
+      black 6%,
+      black 94%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      transparent 0,
+      black 6%,
+      black 94%,
+      transparent 100%
+    );
   }
 
   .journey-marker {
@@ -156,6 +174,7 @@ const LABEL_H = 110;
   @media (max-width: 900px) {
     .journey-sticky {
       grid-template-columns: 1fr;
+      grid-template-rows: none;
       height: auto;
       position: static;
       overflow: visible;
