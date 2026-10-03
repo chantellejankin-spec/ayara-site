@@ -1,7 +1,7 @@
 ---
 // The ribbon is the client's own reference image, used as-is
-// (public/images/journey-ribbon.png, 1122x1402 -- she sent a second,
-// less extreme-aspect version that fits the panel better), not
+// (public/images/journey-ribbon.png, 1122x1402 -- third version she
+// sent, with the band drawn wider across the same canvas), not
 // redrawn as an SVG path. The wrapper below is locked to that exact
 // aspect ratio so percentage-based pin positions line up with the
 // image pixels precisely, however it gets scaled to fit the panel.
@@ -15,11 +15,11 @@ const IMG_H = 1402;
 // band's own centerline: the first knot's rise, its crossing, the
 // open S-bend, the second knot's shoulder, and its lower crossing.
 const stations = [
-  { label: 'Local ideas take root', x: 637.9, y: 170.0 },
-  { label: 'Tools open new pathways', x: 819.2, y: 467.8 },
-  { label: 'Skills turn into confidence', x: 844.2, y: 755.2 },
-  { label: 'Communities grow shared livelihoods', x: 613.6, y: 1072.0 },
-  { label: 'People and nature thrive together', x: 391.0, y: 1271.4 },
+  { label: 'Local ideas take root', x: 991.1, y: 156.1 },
+  { label: 'Tools open new pathways', x: 792.9, y: 432.0 },
+  { label: 'Skills turn into confidence', x: 892.4, y: 742.0 },
+  { label: 'Communities grow shared livelihoods', x: 903.7, y: 1051.0 },
+  { label: 'People and nature thrive together', x: 754.0, y: 1300.0 },
 ].map((s) => ({
   ...s,
   leftPct: (s.x / IMG_W) * 100,
