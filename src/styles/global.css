@@ -219,7 +219,9 @@ a {
 }
 
 .hero-copy h1 {
-  margin-bottom: 0.3em;
+  font-size: clamp(1.9rem, 4.3vw, 3.2rem);
+  line-height: 1.05;
+  margin-bottom: 0.25em;
 }
 
 /* Content sections: framed photo beside a solid-colour text panel */
