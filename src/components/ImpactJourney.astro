@@ -1,42 +1,42 @@
 ---
-// Matches the original site: one long ribbon, much taller than the
-// panel, that the viewer scrolls through (the SVG viewBox's y-offset
-// animates on scroll, see the <script> below) rather than a short
-// path squeezed into a single static screen. That is what gives each
-// station its own generous stretch instead of bunching them up. The
-// shapes vary deliberately (a small ring, a big loop, two flowing
-// bends, a tall oval, a figure-eight) instead of repeating the same
-// circle, same as the reference. Every join's tangent matches on
-// both sides so the stroke reads as one continuous line.
+// A single static viewBox, same scale as the original: the ribbon
+// is not a long path to scroll through, it is one compact shape
+// (slightly taller than the panel so it can enter/exit off-frame
+// cleanly top and bottom). Its five stations are spaced evenly
+// (200 units apart) so none of them bunch up. The shapes vary on
+// purpose -- a small ring, a big loop, two flowing bends, an oval,
+// a figure-eight -- echoing the original's windings instead of
+// repeating one circle. Every join's tangent matches on both sides
+// so the stroke reads as one continuous line, no kinks.
 const PATH_D = `
-  M 365 -150
-  L 365 120
-  C 365 155.9 335.9 185 300 185
-  C 264.1 185 235 155.9 235 120
-  C 235 84.1 264.1 55 300 55
-  C 335.9 55 365 84.1 365 120
-  C 365 280 580 340 580 500
-  C 580 621.5 481.5 720 360 720
-  C 238.5 720 140 621.5 140 500
-  C 140 378.5 238.5 280 360 280
-  C 481.5 280 580 378.5 580 500
-  C 580 680 280 770 280 950
-  C 280 1150 520 1200 520 1400
-  C 520 1650 460 1750 460 2000
-  C 460 2121.5 388.4 2220 300 2220
-  C 211.6 2220 140 2121.5 140 2000
-  C 140 1878.5 211.6 1780 300 1780
-  C 388.4 1780 460 1878.5 460 2000
-  C 460 2180 350 2170 350 2350
-  C 350 2410.75 300.75 2460 240 2460
-  C 179.25 2460 130 2410.75 130 2350
-  C 130 2289.25 179.25 2240 240 2240
-  C 300.75 2240 350 2289.25 350 2350
-  C 350 2410.75 399.25 2460 460 2460
-  C 520.75 2460 570 2410.75 570 2350
-  C 570 2289.25 520.75 2240 460 2240
-  C 399.25 2240 350 2289.25 350 2350
-  L 350 2850
+  M 345 -170
+  L 345 -20
+  C 345 4.85 324.85 25 300 25
+  C 275.15 25 255 4.85 255 -20
+  C 255 -44.85 275.15 -65 300 -65
+  C 324.85 -65 345 -44.85 345 -20
+  C 345 50 395 30 395 100
+  C 395 146.9 356.9 185 310 185
+  C 263.1 185 225 146.9 225 100
+  C 225 53.1 263.1 15 310 15
+  C 356.9 15 395 53.1 395 100
+  C 395 190 250 210 250 300
+  C 250 390 430 410 430 500
+  C 430 630 390 690 390 820
+  C 390 886.3 349.7 940 300 940
+  C 250.3 940 210 886.3 210 820
+  C 210 753.7 250.3 700 300 700
+  C 349.7 700 390 753.7 390 820
+  C 390 890 350 830 350 900
+  C 350 933.1 323.1 960 290 960
+  C 256.9 960 230 933.1 230 900
+  C 230 866.9 256.9 840 290 840
+  C 323.1 840 350 866.9 350 900
+  C 350 933.1 376.9 960 410 960
+  C 443.1 960 470 933.1 470 900
+  C 470 866.9 443.1 840 410 840
+  C 376.9 840 350 866.9 350 900
+  L 350 1100
 `;
 
 // Scroll sequence confirmed by the client: Local ideas take root,
@@ -44,20 +44,15 @@ const PATH_D = `
 // grow shared livelihoods, People and nature thrive together. Each
 // pin sits exactly on the path: the big loop's left point, the two
 // flowing bends, the oval's top, and the figure-eight's right loop.
+// Evenly spaced 200 units apart so the five stations read as one
+// steady progression down the panel.
 const stations = [
-  { label: 'Local ideas take root', x: 140, y: 500 },
-  { label: 'Tools open new pathways', x: 280, y: 950 },
-  { label: 'Skills turn into confidence', x: 520, y: 1400 },
-  { label: 'Communities grow shared livelihoods', x: 300, y: 1780 },
-  { label: 'People and nature thrive together', x: 570, y: 2350 },
+  { label: 'Local ideas take root', x: 225, y: 100 },
+  { label: 'Tools open new pathways', x: 250, y: 300 },
+  { label: 'Skills turn into confidence', x: 430, y: 500 },
+  { label: 'Communities grow shared livelihoods', x: 300, y: 700 },
+  { label: 'People and nature thrive together', x: 470, y: 900 },
 ].map((s) => ({ ...s, labelRight: s.x > 300 ? false : true }));
-
-// The viewBox y-offset animates between these two values as the user
-// scrolls, so the 1000-tall viewing window pans down the full path
-// above. VB_MAX is set so the window's center reaches the last
-// station's y exactly at the end of the scroll range.
-const VB_MIN = -150;
-const VB_MAX = 1850;
 
 const LABEL_W = 250;
 const LABEL_H = 110;
@@ -70,12 +65,12 @@ const LABEL_H = 110;
     </div>
     <div class="split-panel sky journey-panel">
       <p class="eyebrow reveal">Impact Journey</p>
-      <svg class="journey-svg" viewBox={`0 ${VB_MIN} 600 1000`} preserveAspectRatio="xMidYMid meet">
+      <svg class="journey-svg" viewBox="0 0 600 1000" preserveAspectRatio="xMidYMid meet">
         <path
           d={PATH_D}
           fill="none"
           stroke="#fffeb8"
-          stroke-width="34"
+          stroke-width="40"
           stroke-linecap="round"
           stroke-linejoin="round"
         ></path>
@@ -210,44 +205,22 @@ const LABEL_H = 110;
 
 <script>
   const section = document.getElementById('journey');
-  const svg = document.querySelector<SVGSVGElement>('.journey-svg');
   const markers = Array.from(document.querySelectorAll<SVGGElement>('.journey-marker'));
 
-  // Must match VB_MIN / VB_MAX and each station's y in the frontmatter above.
-  const VB_MIN = -150;
-  const VB_MAX = 1850;
-  const STATION_YS = [500, 950, 1400, 1780, 2350];
-
-  if (section && svg && markers.length) {
+  if (section && markers.length) {
     let ticking = false;
 
     const update = () => {
       const rect = section.getBoundingClientRect();
       const scrollable = rect.height - window.innerHeight;
       const progress = scrollable > 0
-        ? Math.min(1, Math.max(0, -rect.top / scrollable))
+        ? Math.min(0.999, Math.max(0, -rect.top / scrollable))
         : 0;
 
-      const viewBoxY = VB_MIN + progress * (VB_MAX - VB_MIN);
-      svg.setAttribute('viewBox', `0 ${viewBoxY} 600 1000`);
-
-      // Whichever station sits nearest the center of the current
-      // viewing window is the active one, so the pin stays correct
-      // regardless of how unevenly the stations are spaced along
-      // the path.
-      const viewCenter = viewBoxY + 500;
-      let nearest = 0;
-      let bestDist = Infinity;
-      STATION_YS.forEach((y, i) => {
-        const d = Math.abs(y - viewCenter);
-        if (d < bestDist) {
-          bestDist = d;
-          nearest = i;
-        }
-      });
+      const activeIndex = Math.floor(progress * markers.length);
 
       markers.forEach((m, i) => {
-        m.classList.toggle('active', i === nearest);
+        m.classList.toggle('active', i === activeIndex);
       });
 
       ticking = false;
