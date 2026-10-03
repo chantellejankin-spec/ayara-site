@@ -1,25 +1,25 @@
 ---
 // The ribbon is the client's own reference image, used as-is
-// (public/images/journey-ribbon.png, 1122x1402 -- third version she
-// sent, with the band drawn wider across the same canvas), not
-// redrawn as an SVG path. The wrapper below is locked to that exact
-// aspect ratio so percentage-based pin positions line up with the
-// image pixels precisely, however it gets scaled to fit the panel.
-const IMG_W = 1122;
-const IMG_H = 1402;
+// (public/images/journey-ribbon.png, 1112x1415 -- fourth version she
+// sent), not redrawn as an SVG path. The wrapper below is locked to
+// that exact aspect ratio so percentage-based pin positions line up
+// with the image pixels precisely, however it gets scaled to fit
+// the panel.
+const IMG_W = 1112;
+const IMG_H = 1415;
 
 // Scroll sequence confirmed by the client: Local ideas take root,
 // Tools open new pathways, Skills turn into confidence, Communities
 // grow shared livelihoods, People and nature thrive together. Pixel
-// coordinates (on the 1122x1402 source image) traced from the
+// coordinates (on the 1112x1415 source image) traced from the
 // band's own centerline: the first knot's rise, its crossing, the
 // open S-bend, the second knot's shoulder, and its lower crossing.
 const stations = [
-  { label: 'Local ideas take root', x: 991.1, y: 156.1 },
-  { label: 'Tools open new pathways', x: 792.9, y: 432.0 },
-  { label: 'Skills turn into confidence', x: 892.4, y: 742.0 },
-  { label: 'Communities grow shared livelihoods', x: 903.7, y: 1051.0 },
-  { label: 'People and nature thrive together', x: 754.0, y: 1300.0 },
+  { label: 'Local ideas take root', x: 392.2, y: 164.0 },
+  { label: 'Tools open new pathways', x: 399.0, y: 450.6 },
+  { label: 'Skills turn into confidence', x: 514.7, y: 786.0 },
+  { label: 'Communities grow shared livelihoods', x: 346.5, y: 1059.5 },
+  { label: 'People and nature thrive together', x: 255.6, y: 1319.6 },
 ].map((s) => ({
   ...s,
   leftPct: (s.x / IMG_W) * 100,
@@ -103,7 +103,7 @@ const stations = [
     position: relative;
     height: 100%;
     max-width: 100%;
-    aspect-ratio: 1122 / 1402;
+    aspect-ratio: 1112 / 1415;
   }
 
   .journey-figure-inner img {
