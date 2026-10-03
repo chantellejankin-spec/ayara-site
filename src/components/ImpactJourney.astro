@@ -1,53 +1,55 @@
 ---
-// Built point-by-point (not hand-guessed) so every join's tangent
-// matches exactly: a real nautilus spiral (radius growing step by
-// step around a continuously shifting center, the way the original
-// curls from a tight inner coil out to a big loop), then two flowing
-// bends, a loop, and a figure-eight. One static viewBox, same scale
-// as the original -- no scrolling. Station y's land at 175/400/580/
-// 730/970, reasonably even without forcing artificial symmetry on
-// organically-sized shapes.
+// Modeled directly on a reference photo of the original ribbon the
+// client sent: one continuous, self-crossing band that uses the
+// full width of the panel and loosely winds and knots on itself,
+// not a tidy spiral or separate circles. Built from a waypoint list
+// run through a Catmull-Rom-to-bezier conversion, which gives every
+// point a smooth, organically-varying tangent automatically (derived
+// from its neighbors) instead of forcing a rigid geometric shape.
 const PATH_D = `
-  M 300.00 100.00 L 300.00 200.00
-  C 300.00 219.33 315.67 235.00 335.00 235.00
-  C 359.85 235.00 380.00 214.85 380.00 190.00
-  C 380.00 156.86 353.14 130.00 320.00 130.00
-  C 275.82 130.00 240.00 165.82 240.00 210.00
-  C 240.00 267.99 287.01 315.00 345.00 315.00
-  C 422.32 315.00 485.00 252.32 485.00 175.00
-  C 485.00 92.16 417.84 25.00 335.00 25.00
-  C 252.16 25.00 185.00 92.16 185.00 175.00
-  C 185.00 275.00 230.00 300.00 230.00 400.00
-  C 230.00 490.00 420.00 490.00 420.00 580.00
-  C 420.00 660.00 300.00 650.00 300.00 730.00
-  C 300.00 785.23 255.23 830.00 200.00 830.00
-  C 144.77 830.00 100.00 785.23 100.00 730.00
-  C 100.00 674.77 144.77 630.00 200.00 630.00
-  C 255.23 630.00 300.00 674.77 300.00 730.00
-  C 300.00 840.00 350.00 860.00 350.00 970.00
-  C 350.00 1011.42 383.58 1045.00 425.00 1045.00
-  C 466.42 1045.00 500.00 1011.42 500.00 970.00
-  C 500.00 928.58 466.42 895.00 425.00 895.00
-  C 383.58 895.00 350.00 928.58 350.00 970.00
-  C 350.00 1011.42 316.42 1045.00 275.00 1045.00
-  C 233.58 1045.00 200.00 1011.42 200.00 970.00
-  C 200.00 928.58 233.58 895.00 275.00 895.00
-  C 316.42 895.00 350.00 928.58 350.00 970.00
-  L 350.00 1060.00
+  M 100.00 -60.00
+  C 136.67 -45.00 250.00 -3.33 320.00 30.00
+  C 390.00 63.33 500.00 95.00 520.00 140.00
+  C 540.00 185.00 483.33 268.33 440.00 300.00
+  C 396.67 331.67 278.33 303.33 260.00 330.00
+  C 241.67 356.67 290.00 443.33 330.00 460.00
+  C 370.00 476.67 461.67 460.00 500.00 430.00
+  C 538.33 400.00 571.67 323.33 560.00 280.00
+  C 548.33 236.67 486.67 181.67 430.00 170.00
+  C 373.33 158.33 276.67 176.67 220.00 210.00
+  C 163.33 243.33 108.33 315.00 90.00 370.00
+  C 71.67 425.00 76.67 496.67 110.00 540.00
+  C 143.33 583.33 226.67 610.00 290.00 630.00
+  C 353.33 650.00 441.67 631.67 490.00 660.00
+  C 538.33 688.33 585.00 760.00 580.00 800.00
+  C 575.00 840.00 513.33 883.33 460.00 900.00
+  C 406.67 916.67 318.33 913.33 260.00 900.00
+  C 201.67 886.67 143.33 811.67 110.00 820.00
+  C 76.67 828.33 58.33 906.67 60.00 950.00
+  C 61.67 993.33 78.33 1048.33 120.00 1080.00
+  C 161.67 1111.67 248.33 1138.33 310.00 1140.00
+  C 371.67 1141.67 451.67 1121.67 490.00 1090.00
+  C 528.33 1058.33 553.33 985.00 540.00 950.00
+  C 526.67 915.00 456.67 876.67 410.00 880.00
+  C 363.33 883.33 288.33 931.67 260.00 970.00
+  C 231.67 1008.33 221.67 1068.33 240.00 1110.00
+  C 258.33 1151.67 326.67 1191.67 370.00 1220.00
+  C 413.33 1248.33 478.33 1270.00 500.00 1280.00
 `;
 
 // Scroll sequence confirmed by the client: Local ideas take root,
 // Tools open new pathways, Skills turn into confidence, Communities
 // grow shared livelihoods, People and nature thrive together. Each
-// pin sits exactly on the path: the spiral's outer end, the two
-// flowing bends, the loop's apex, and the figure-eight's outer point.
+// pin sits on a waypoint the band actually passes through: the first
+// knot's peak, its lower crossing, the open S-bend, the second
+// knot's shoulder, and its tail as it flows toward the exit.
 const stations = [
-  { label: 'Local ideas take root', x: 185, y: 175 },
-  { label: 'Tools open new pathways', x: 230, y: 400 },
-  { label: 'Skills turn into confidence', x: 420, y: 580 },
-  { label: 'Communities grow shared livelihoods', x: 300, y: 730 },
-  { label: 'People and nature thrive together', x: 200, y: 970 },
-].map((s) => ({ ...s, labelRight: s.x > 300 ? false : true }));
+  { label: 'Local ideas take root', x: 520, y: 140 },
+  { label: 'Tools open new pathways', x: 330, y: 460 },
+  { label: 'Skills turn into confidence', x: 580, y: 800 },
+  { label: 'Communities grow shared livelihoods', x: 120, y: 1080 },
+  { label: 'People and nature thrive together', x: 500, y: 1280 },
+].map((s) => ({ ...s, labelRight: s.x > 325 ? false : true }));
 
 const LABEL_W = 250;
 const LABEL_H = 110;
@@ -60,7 +62,7 @@ const LABEL_H = 110;
     </div>
     <div class="split-panel sky journey-panel">
       <p class="eyebrow reveal">Impact Journey</p>
-      <svg class="journey-svg" viewBox="0 0 600 1150" preserveAspectRatio="xMidYMid meet">
+      <svg class="journey-svg" viewBox="0 -100 650 1450" preserveAspectRatio="xMidYMid meet">
         <path
           d={PATH_D}
           fill="none"
