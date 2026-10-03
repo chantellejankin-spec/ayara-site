@@ -1,55 +1,99 @@
 ---
-// Modeled directly on a reference photo of the original ribbon the
-// client sent: one continuous, self-crossing band that uses the
-// full width of the panel and loosely winds and knots on itself,
-// not a tidy spiral or separate circles. Built from a waypoint list
-// run through a Catmull-Rom-to-bezier conversion, which gives every
-// point a smooth, organically-varying tangent automatically (derived
-// from its neighbors) instead of forcing a rigid geometric shape.
+// Traced directly from the reference PNG the client designed
+// (Pastellgelbe Endlosschleife auf Eisblau.png), not estimated: the
+// yellow band was isolated by color, skeletonized to its centerline,
+// and the centerline graph walked through both of its self-crossings
+// in the correct order, giving an exact pixel path. That path was
+// resampled to 70 evenly-spaced points (scaled 0.714x from the
+// source image) and run through a Catmull-Rom-to-bezier conversion
+// for smooth tangents. Same two-knot, full-width, continuous
+// winding shape as the reference, not a rebuild from memory.
 const PATH_D = `
-  M 100.00 -60.00
-  C 136.67 -45.00 250.00 -3.33 320.00 30.00
-  C 390.00 63.33 500.00 95.00 520.00 140.00
-  C 540.00 185.00 483.33 268.33 440.00 300.00
-  C 396.67 331.67 278.33 303.33 260.00 330.00
-  C 241.67 356.67 290.00 443.33 330.00 460.00
-  C 370.00 476.67 461.67 460.00 500.00 430.00
-  C 538.33 400.00 571.67 323.33 560.00 280.00
-  C 548.33 236.67 486.67 181.67 430.00 170.00
-  C 373.33 158.33 276.67 176.67 220.00 210.00
-  C 163.33 243.33 108.33 315.00 90.00 370.00
-  C 71.67 425.00 76.67 496.67 110.00 540.00
-  C 143.33 583.33 226.67 610.00 290.00 630.00
-  C 353.33 650.00 441.67 631.67 490.00 660.00
-  C 538.33 688.33 585.00 760.00 580.00 800.00
-  C 575.00 840.00 513.33 883.33 460.00 900.00
-  C 406.67 916.67 318.33 913.33 260.00 900.00
-  C 201.67 886.67 143.33 811.67 110.00 820.00
-  C 76.67 828.33 58.33 906.67 60.00 950.00
-  C 61.67 993.33 78.33 1048.33 120.00 1080.00
-  C 161.67 1111.67 248.33 1138.33 310.00 1140.00
-  C 371.67 1141.67 451.67 1121.67 490.00 1090.00
-  C 528.33 1058.33 553.33 985.00 540.00 950.00
-  C 526.67 915.00 456.67 876.67 410.00 880.00
-  C 363.33 883.33 288.33 931.67 260.00 970.00
-  C 231.67 1008.33 221.67 1068.33 240.00 1110.00
-  C 258.33 1151.67 326.67 1191.67 370.00 1220.00
-  C 413.33 1248.33 478.33 1270.00 500.00 1280.00
+  M 131.38 0.00
+  C 126.26 7.24 102.98 26.97 100.67 43.46
+  C 98.36 59.95 106.86 84.00 117.50 98.94
+  C 128.14 113.88 146.75 127.00 164.53 133.12
+  C 182.31 139.24 204.84 137.73 224.15 135.66
+  C 243.46 133.59 261.10 124.12 280.39 120.67
+  C 299.68 117.22 320.20 114.35 339.88 114.95
+  C 359.56 115.55 380.39 117.65 398.46 124.29
+  C 416.52 130.93 435.78 141.05 448.27 154.81
+  C 460.76 168.57 470.98 188.71 473.38 206.86
+  C 475.78 225.01 471.51 247.92 462.67 263.69
+  C 453.83 279.46 426.43 285.67 420.36 301.50
+  C 414.29 317.33 427.05 339.59 426.26 358.70
+  C 425.47 377.81 423.79 399.19 415.65 416.16
+  C 407.51 433.13 393.27 451.35 377.43 460.53
+  C 361.59 469.71 338.41 474.11 320.60 471.24
+  C 302.79 468.38 279.08 457.30 270.55 443.34
+  C 262.02 429.38 261.63 402.34 269.41 387.47
+  C 277.19 372.60 300.27 363.14 317.22 354.14
+  C 334.17 345.13 354.58 341.63 371.09 333.44
+  C 387.59 325.25 414.87 317.48 416.25 305.02
+  C 417.63 292.56 394.67 269.42 379.36 258.69
+  C 364.05 247.96 343.42 242.56 324.39 240.62
+  C 305.36 238.68 283.80 241.93 265.20 247.04
+  C 246.60 252.15 228.80 260.35 212.80 271.30
+  C 196.80 282.25 180.03 296.91 169.20 312.75
+  C 158.37 328.59 151.11 347.40 147.80 366.34
+  C 144.49 385.28 145.26 407.54 149.34 426.37
+  C 153.42 445.20 160.59 464.69 172.29 479.31
+  C 183.98 493.93 202.07 506.26 219.51 514.08
+  C 236.95 521.90 257.20 523.60 276.93 526.22
+  C 296.66 528.84 317.77 528.12 337.90 529.79
+  C 358.02 531.45 379.86 529.73 397.68 536.21
+  C 415.50 542.69 436.78 553.86 444.82 568.67
+  C 452.86 583.48 454.13 611.45 445.93 625.07
+  C 437.73 638.69 413.93 647.11 395.64 650.37
+  C 377.35 653.63 355.81 647.33 336.21 644.66
+  C 316.61 641.99 297.58 635.03 278.04 634.33
+  C 258.50 633.63 237.21 634.58 218.97 640.46
+  C 200.73 646.34 182.61 656.68 168.61 669.63
+  C 154.61 682.58 142.47 700.43 134.95 718.13
+  C 127.43 735.83 123.40 756.66 123.52 775.85
+  C 123.64 795.04 128.32 815.61 135.66 833.27
+  C 143.00 850.93 154.79 877.08 167.57 881.79
+  C 180.35 886.50 196.72 870.33 212.34 861.52
+  C 227.96 852.71 244.05 837.59 261.29 828.95
+  C 278.53 820.31 296.62 813.25 315.76 809.68
+  C 334.90 806.11 356.78 805.17 376.13 807.53
+  C 395.48 809.89 415.15 814.60 431.84 823.82
+  C 448.52 833.04 466.45 847.02 476.24 862.86
+  C 486.03 878.70 491.44 900.43 490.60 918.83
+  C 489.76 937.23 483.03 959.84 471.18 973.24
+  C 459.33 986.64 438.10 995.30 419.50 999.22
+  C 400.90 1003.14 378.78 1000.01 359.57 996.74
+  C 340.36 993.47 322.08 986.75 304.22 979.61
+  C 286.36 972.47 269.09 963.90 252.42 953.90
+  C 235.74 943.90 219.23 924.48 204.17 919.63
+  C 189.11 914.78 172.55 914.94 162.08 924.78
+  C 151.61 934.62 145.62 959.72 141.37 978.65
+  C 137.12 997.58 134.06 1019.38 136.58 1038.36
+  C 139.10 1057.34 145.33 1077.69 156.50 1092.55
+  C 167.67 1107.41 186.38 1119.23 203.62 1127.54
+  C 220.86 1135.85 240.91 1138.02 259.91 1142.40
+  C 278.91 1146.78 298.76 1149.11 317.63 1153.82
+  C 336.50 1158.53 356.01 1162.02 373.11 1170.65
+  C 390.21 1179.29 408.87 1190.84 420.23 1205.63
+  C 431.59 1220.42 439.13 1240.68 441.25 1259.37
+  C 443.37 1278.06 440.00 1299.99 432.94 1317.78
+  C 425.88 1335.57 413.80 1355.25 398.88 1366.12
+  C 383.96 1376.99 352.67 1380.20 343.43 1383.02
 `;
 
 // Scroll sequence confirmed by the client: Local ideas take root,
 // Tools open new pathways, Skills turn into confidence, Communities
 // grow shared livelihoods, People and nature thrive together. Each
-// pin sits on a waypoint the band actually passes through: the first
-// knot's peak, its lower crossing, the open S-bend, the second
-// knot's shoulder, and its tail as it flows toward the exit.
+// pin sits on an actual traced waypoint, evenly spaced along the
+// path's length: the first knot's rise, its crossing, the open
+// S-bend, the second knot's shoulder, and its lower crossing.
 const stations = [
-  { label: 'Local ideas take root', x: 520, y: 140 },
-  { label: 'Tools open new pathways', x: 330, y: 460 },
-  { label: 'Skills turn into confidence', x: 580, y: 800 },
-  { label: 'Communities grow shared livelihoods', x: 120, y: 1080 },
-  { label: 'People and nature thrive together', x: 500, y: 1280 },
-].map((s) => ({ ...s, labelRight: s.x > 325 ? false : true }));
+  { label: 'Local ideas take root', x: 224.15, y: 135.66 },
+  { label: 'Tools open new pathways', x: 415.65, y: 416.16 },
+  { label: 'Skills turn into confidence', x: 134.95, y: 718.13 },
+  { label: 'Communities grow shared livelihoods', x: 304.22, y: 979.61 },
+  { label: 'People and nature thrive together', x: 441.25, y: 1259.37 },
+].map((s) => ({ ...s, labelRight: s.x > 300 ? false : true }));
 
 const LABEL_W = 250;
 const LABEL_H = 110;
@@ -62,12 +106,12 @@ const LABEL_H = 110;
     </div>
     <div class="split-panel sky journey-panel">
       <p class="eyebrow reveal">Impact Journey</p>
-      <svg class="journey-svg" viewBox="0 -100 650 1450" preserveAspectRatio="xMidYMid meet">
+      <svg class="journey-svg" viewBox="0 0 600 1400" preserveAspectRatio="xMidYMid meet">
         <path
           d={PATH_D}
           fill="none"
           stroke="#fffeb8"
-          stroke-width="40"
+          stroke-width="43"
           stroke-linecap="round"
           stroke-linejoin="round"
         ></path>
